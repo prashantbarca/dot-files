@@ -1,0 +1,78 @@
+(global-linum-mode t)
+(setq inhibit-startup-message t)
+(setq create-lockfiles nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (deeper-blue))))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(abbrev-mode t)
+ '(auto-save-default nil)
+ '(comment-column 2)
+ '(current-language-environment "UTF-8")
+ '(default-input-method "latin-1-prefix")
+ '(ffap-newfile-prompt t)
+ '(font-lock-maximum-decoration 2)
+ '(indicate-empty-lines nil)
+ '(initial-major-mode (quote text-mode))
+ '(initial-scratch-message "")
+ ;; …
+)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(completions-common-part ((t (:inherit default :foreground "red"))))
+ '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
+ '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
+ '(isearch ((((class color) (min-colors 88) (background light)) (:background "black" :foreground "white"))))
+ '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this lin
+(projectile-global-mode)
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(require 'egg)
+(global-set-key (kbd "C-x ga") 'egg-stage-all-files)
+(global-set-key (kbd "C-x gs") 'egg-status)
+(global-set-key (kbd "C-x gc") 'egg-commit-log-edit)
+(require 'yasnippet)
+(yas-global-mode 1)
+(electric-pair-mode 1)
+(global-set-key (kbd "C-x cu") 'uncomment-region)
+(global-set-key (kbd "C-x cs") 'comment-region)
+(global-set-key (kbd "C-x ci") 'comment-indent)
+(global-set-key (kbd "C-x p") 'projectile-find-file)
+(global-set-key (kbd "C-;") 'er/expand-region)
+(require 'change-inner)
+(global-set-key (kbd "M-i") 'change-inner)
+(global-set-key (kbd "M-o") 'change-outer)
+(defun sgml-delete-tagged-text ()
+  "delete text between the tags that contain the current point"
+  (interactive)
+  (let ((b (point)))
+    (sgml-skip-tag-backward 1)
+    (when (not (eq b (point)))
+      ;; moved somewhere, should be at front of a tag now
+      (save-excursion 
+        (forward-sexp 1)
+        (setq b (point)))
+      (sgml-skip-tag-forward 1)
+      (backward-sexp 1)
+      (delete-region b (point)))))
+(global-set-key (kbd "M-t") 'sgml-delete-tagged-text)
