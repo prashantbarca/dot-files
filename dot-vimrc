@@ -1,0 +1,67 @@
+set nu
+set ai
+set nocompatible               " be iMproved
+filetype off                   " required!
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p 
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" repos from github
+Bundle 'scrooloose/nerdtree'
+set noswapfile
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "scrooloose/nerdcommenter"
+Bundle "kien/ctrlp.vim"
+Bundle "aperezdc/vim-template"
+Bundle "tpope/vim-rails"
+"vim-script repos
+"none currently
+
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+ nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+
+"My settings
+set nu
+set ai
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set hlsearch
+set incsearch
+set ru
+set mouse="a"
+set smartindent
+set paste
+syntax enable
+colorscheme corporation
+
+"Press <F9> to compile and run
+filetype on
+au FileType c     nnoremap <buffer> <silent> <F9> :!gcc %:p && %:h/a.out<CR>
+au FileType cpp     nnoremap <buffer> <silent> <F9> :!g++ %:p && %:h/a.out<CR>
+au FileType python  nnoremap <buffer> <silent> <F9> :!python %:p<CR>
+au FileType java    nnoremap <buffer> <silent> <F9> "!javac %:p && %:h/%:r<CR>
+map ;w :w
+map ;q :wq
