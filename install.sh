@@ -1,5 +1,5 @@
 
-git clone git@github.com:prashantbarca/dot-files.git
+git clone http://github.com/prashantbarca/dot-files.git
 cd dot-files
 
 cp dot-emacs ~/.emacs
