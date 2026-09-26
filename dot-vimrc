@@ -9,18 +9,20 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim', {'name': 'vundle'}
 
 " My Bundles here:
 "
 " repos from github
-Bundle 'scrooloose/nerdtree'
+Bundle 'preservim/nerdtree'
 set noswapfile
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
-Bundle "scrooloose/nerdcommenter"
-Bundle "kien/ctrlp.vim"
+Bundle "honza/vim-snippets"
+let g:snipMate = { 'snippet_version' : 1 }
+Bundle "preservim/nerdcommenter"
+Bundle "ctrlpvim/ctrlp.vim"
 Bundle "aperezdc/vim-template"
 Bundle "tpope/vim-rails"
 "vim-script repos
